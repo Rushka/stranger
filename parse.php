@@ -1,5 +1,5 @@
 <?php
-	$avito_index = realpath('avito.js');
+	$avito_index = realpath('avito_index.js');
 	$avito_parse_lots = realpath('avito_parse_lots.js');
 
 	# Квартиры
@@ -11,13 +11,13 @@
 	# Квартиры - Продажа - 1-комнатные
 	$url .= '1-komnatnye';
 
+	# Проходимся по списку и запоминаем ссылки
 	# Пагинатор
 	$pages = 1; # Количество страниц
 	$page_index = '';
 	for ($i=1; $i <= $pages; $i++) {
 		$page_index .= shell_exec('phantomjs '. $avito_index .' '. $url .'?p='. $i);
 	}
-
 	$page_index = explode('; ', $page_index);
 
 	# Парсим лоты
