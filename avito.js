@@ -12,35 +12,24 @@ var page = require('webpage').create(),
 
 
 function parse_pages(pages, current_page) {
-	current_page = current_page || 1;
-	current_url = url + '?p=' + current_page;
-	console.log(current_url);
-
-	var list;
+	current_url = url;
+	// console.log(current_url);
 
 	page.open(url, function (status) {
 		page.injectJs('lib/jquery-1.9.1.min.js');
 
 		var list = page.evaluate(function() {
-			var res = new Array;
-			$('.item_table h3 a').each(function(){
-				res.push($(this).attr('href') + '; ');
-			});
+			// var res = new Array;
+			// $('.item_table h3 a').each(function(){
+			// 	res.push($(this).text());
+			// });
+
+			res = ' страница:' + $('.pagination__pages span').text();
 			return res;
 		});
-
 		console.log(list);
-
-		if (current_page < pages) {
-			current_page += 1;
-			parse_pages(pages, current_page);
-		} else {
-			// parse_lots(list);
-			phantom.exit();
-		}
-		page.close();
+		phantom.exit();
 	});
-
 }
 
 function parse_lots(list, current_lot){
@@ -64,9 +53,9 @@ function parse_lots(list, current_lot){
 			// current_lot += 1;
 			// parse_lots(list, current_lot);
 		// } else {
-			// phantom.exit();
+			phantom.exit();
 		// }
 	});
 }
 
-parse_pages(2);
+parse_pages(10);

@@ -11,15 +11,19 @@
 	$url .= '1-komnatnye';
 
 	# Скармливаем парсеру список квартир
+	$result = '';
+	for ($i=1; $i < 5; $i++) {
+		$result = shell_exec('phantomjs '. $scriptpath .' '. $url .'?p='. $i);
+		echo 'phantomjs '. $scriptpath .' '. $url .'?p='. $i;
 
-	$result = shell_exec('phantomjs '. $scriptpath .' '. $url);
-	// echo('phantomjs '. $scriptpath .' '. $url);
-
-	$result = explode('; ', $result);
-
-	foreach ($result as $value) {
-		echo($value);
+		echo $result;
 	}
+
+
+
+	// foreach ($result as $value) {
+	// 	echo($value);
+	// }
 
 	// echo $result;
 ?>
